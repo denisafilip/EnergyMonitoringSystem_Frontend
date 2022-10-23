@@ -43,11 +43,11 @@ export class LoginComponent implements OnInit {
         localStorage.setItem(this.tokenKey, this.user.token);
         console.log(this.user.role);
         if (this.user.role == 'CLIENT') {
-          this.router.navigate(['/client']).then(r => {});
+          this.router.navigate(['/client']).then(() => {});
         } else if (this.user.role == 'ADMIN') {
-          this.router.navigate(['/dashboard/admin']).then(r => {});
+          this.router.navigate(['/dashboard/admin']).then(() => {});
         } else {
-          this.router.navigate(['/login']).then(r => {});
+          this.router.navigate(['/login']).then(() => {});
         }
       },
       error: (error) => {

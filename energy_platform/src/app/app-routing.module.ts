@@ -10,8 +10,7 @@ import {ClientComponent} from "./client/client.component";
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-    canActivate: [AuthGuard],
+    component: HomeComponent
   },
   {
     path: 'login',
