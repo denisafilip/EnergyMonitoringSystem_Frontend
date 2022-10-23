@@ -26,6 +26,9 @@
           <input matInput type="password" formControlName="password" />
         </mat-form-field>
       </form>
+      <div *ngIf="errorMessage" class="alert alert-error">
+        <strong>Error!</strong> {{errorMessage | json}}
+      </div>
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" (click)="onSubmit()">

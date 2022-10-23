@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationClient } from '../clients/authentication.client';
 import {Observable, throwError} from "rxjs";
 import {environment} from "../../environments/environment";
 import {catchError} from "rxjs/operators";
@@ -9,6 +8,7 @@ import {HttpClient} from "@angular/common/http";
 export interface User {
   email: string;
   token: string;
+  role: string;
 }
 
 @Injectable({
@@ -20,7 +20,6 @@ export class AuthenticationService {
   user: User | undefined;
 
   constructor(
-    private authenticationClient: AuthenticationClient,
     private router: Router,
     private http: HttpClient
   ) {}
@@ -40,17 +39,19 @@ export class AuthenticationService {
     );
   }
 
-  public register(name: string, email: string, password: string): void {
-    this.authenticationClient
-      .register(name, email, password)
-      .subscribe((user) => {
-        this.user = {
-          email: user.email,
-          token: user.token
-        }
-        localStorage.setItem(this.tokenKey, this.user.token);
-        this.router.navigate(['/']).then(r => {});
-      });
+  public register(name: string, email: string, password: string): Observable<User> {
+    return this.http.post<User>(
+      environment.apiUrl + 'register/',
+      {
+        name: name,
+        email: email,
+        password: password,
+      }
+    ).pipe(
+      catchError((err) => {
+        return throwError(err);
+      })
+    );
   }
 
   public logout() {

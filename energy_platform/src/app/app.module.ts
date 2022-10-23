@@ -16,13 +16,17 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import { RegisterComponent } from './register/register.component';
 import {ErrorIntercept} from "./error.interceptor";
+import { AdminComponent } from './admin/admin.component';
+import { ClientComponent } from './client/client.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminComponent,
+    ClientComponent
   ],
   imports: [
     BrowserModule,

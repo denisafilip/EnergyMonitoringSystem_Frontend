@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../services/authentication.service";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-client',
+  templateUrl: './client.component.html',
+  styleUrls: ['./client.component.css']
 })
-
-export class HomeComponent implements OnInit {
+export class ClientComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -18,4 +17,5 @@ export class HomeComponent implements OnInit {
   logout(): void {
     this.authenticationService.logout();
   }
+
 }

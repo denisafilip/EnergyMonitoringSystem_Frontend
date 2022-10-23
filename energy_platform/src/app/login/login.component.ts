@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {AuthenticationService, User} from '../services/authentication.service';
-import {throwError} from "rxjs";
-import {AuthenticationClient} from "../clients/authentication.client";
 import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -39,10 +36,19 @@ export class LoginComponent implements OnInit {
       next: (user) => {
         this.user = {
           email: user.email,
-          token: user.token
+          token: user.token,
+          role: user.role
         }
+        console.log(user);
         localStorage.setItem(this.tokenKey, this.user.token);
-        this.router.navigate(['/']).then(r => {});
+        console.log(this.user.role);
+        if (this.user.role == 'CLIENT') {
+          this.router.navigate(['/client']).then(r => {});
+        } else if (this.user.role == 'ADMIN') {
+          this.router.navigate(['/dashboard/admin']).then(r => {});
+        } else {
+          this.router.navigate(['/login']).then(r => {});
+        }
       },
       error: (error) => {
         this.errorMessage = error;
