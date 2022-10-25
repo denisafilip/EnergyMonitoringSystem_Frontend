@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
       this.registerForm!.get('password')!.value
     ).subscribe({
       next: () => {
-        this.router.navigate(['/login']).then(r => {});
+        this.router.navigate(['/login']).then(() => {});
       }, error: (error) => {
         this.errorMessage = error;
       }
