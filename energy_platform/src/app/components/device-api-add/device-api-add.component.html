@@ -1,1 +1,73 @@
-<p>device-api-add works!</p>
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+        <label for="name">Title</label>
+        <input
+          type="text"
+          class="form-control"
+          id="name"
+          required
+          [(ngModel)]="device.name"
+          name="name"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input
+          class="form-control"
+          id="description"
+          required
+          [(ngModel)]="device.description"
+          name="description"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input
+          class="form-control"
+          id="address"
+          required
+          [(ngModel)]="device.address"
+          name="address"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="max_hourly_consumption">Maximum Hourly Consumption</label>
+        <input
+          class="form-control"
+          id="max_hourly_consumption"
+          required
+          [(ngModel)]="device.max_hourly_consumption"
+          name="max_hourly_consumption"
+        />
+      </div>
+      <br/>
+      <button
+        class="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
+        type="button"
+        data-mdb-ripple="true"
+        data-mdb-ripple-color="light"
+        style="
+                        background: linear-gradient(
+                          to right,
+                          #ee7724,
+                          #d8363a,
+                          #dd3675,
+                          #b44593
+                        );"
+        (click)="saveDevice()"
+      >
+        Add
+      </button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>The new device was submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newDevice()">Add</button>
+    </div>
+  </div>
+</div>

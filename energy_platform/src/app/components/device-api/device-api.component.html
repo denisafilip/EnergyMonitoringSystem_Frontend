@@ -1,1 +1,62 @@
-<p>device-api works!</p>
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by name"
+        [(ngModel)]="name"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchName()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Devices List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let device of devices; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveDevice(device, i)"
+      >
+        {{ device.name }}
+      </li>
+    </ul>
+
+    <br/>
+    <button
+      class="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
+      type="button"
+      data-mdb-ripple="true"
+      data-mdb-ripple-color="light"
+      style="
+                        background: linear-gradient(
+                          to right,
+                          #ee7724,
+                          #d8363a,
+                          #dd3675,
+                          #b44593
+                        );"
+      (click)="removeAllDevices()"
+    >
+      Remove All
+    </button>
+  </div>
+  <div class="col-md-6">
+    <app-device-api-details
+      [viewMode]="true"
+      [currentDevice]="currentDevice"
+    ></app-device-api-details>
+  </div>
+  <div class="col-md-4">
+    <app-device-api-add></app-device-api-add>
+  </div>
+</div>
