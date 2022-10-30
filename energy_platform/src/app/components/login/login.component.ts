@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import {AuthenticationService, User} from '../services/authentication.service';
+import {AuthenticationService, UserAuth} from '../../services/authentication/authentication.service';
 import {Router} from "@angular/router";
 
 @Component({
@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
   errorMessage = '';
-  user: User | undefined;
+  user: UserAuth | undefined;
   private tokenKey = 'token';
 
   constructor(
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
           role: user.role
         }
         console.log(user);
-        localStorage.setItem(this.tokenKey, this.user.token);
+        sessionStorage.setItem(this.tokenKey, this.user.token);
         console.log(this.user.role);
         if (this.user.role == 'CLIENT') {
           this.router.navigate(['/client']).then(() => {});

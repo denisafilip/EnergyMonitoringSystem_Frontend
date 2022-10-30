@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthenticationService} from "../services/authentication.service";
+import {AuthenticationService} from "../../services/authentication/authentication.service";
+import {Routes} from "@angular/router";
+import {ClientApiComponent} from "../client-api/client-api.component";
 
 @Component({
   selector: 'app-admin',
@@ -18,3 +20,4 @@ export class AdminComponent implements OnInit {
     this.authenticationService.logout();
   }
 }
+
