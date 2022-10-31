@@ -51,12 +51,12 @@
     </button>
   </div>
   <div class="col-md-6">
-    <app-device-api-details
+    <app-device-api-details (click)="refreshList()"
       [viewMode]="true"
       [currentDevice]="currentDevice"
     ></app-device-api-details>
   </div>
   <div class="col-md-4">
-    <app-device-api-add></app-device-api-add>
+    <app-device-api-add (click)="refreshList()"></app-device-api-add>
   </div>
 </div>

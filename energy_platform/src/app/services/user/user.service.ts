@@ -26,7 +26,7 @@ export class UserService {
   }
 
   update(id: any, data: any): Observable<any> {
-    return this.http.put(`${baseUrl}${id}/`, data);
+    return this.http.patch<User>(`${baseUrl}${id}/`, data);
   }
 
   delete(id: any): Observable<any> {
