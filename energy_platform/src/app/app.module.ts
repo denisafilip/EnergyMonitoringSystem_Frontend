@@ -16,13 +16,19 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import { RegisterComponent } from './components/register/register.component';
 import {ErrorIntercept} from "./error.interceptor";
-import { AdminComponent } from './components/admin/admin.component';
-import { ClientComponent } from './components/client/client.component';
-import { ClientApiComponent } from './components/client-api/client-api.component';
-import { ClientDetailsComponent } from './components/client-api-details/client-details.component';
-import { DeviceApiComponent } from './components/device-api/device-api.component';
-import { DeviceApiDetailsComponent } from './components/device-api-details/device-api-details.component';
-import { DeviceApiAddComponent } from './components/device-api-add/device-api-add.component';
+import { AdminComponent } from './components/admin-dashboard/admin/admin.component';
+import { ClientComponent } from './components/client-dashboard/client/client.component';
+import { ClientApiComponent } from './components/admin-dashboard/client-api/client-api.component';
+import { ClientDetailsComponent } from './components/admin-dashboard/client-api-details/client-details.component';
+import { DeviceApiComponent } from './components/admin-dashboard/device-api/device-api.component';
+import { DeviceApiDetailsComponent } from './components/admin-dashboard/device-api-details/device-api-details.component';
+import { DeviceApiAddComponent } from './components/admin-dashboard/device-api-add/device-api-add.component';
+import { MappingComponent } from './components/admin-dashboard/mapping/mapping.component';
+import { DeviceComponent } from './components/client-dashboard/device/device.component';
+import { ConsumptionComponent } from './components/client-dashboard/consumption/consumption.component';
+import {CanvasJSChart} from "../assets/canvasjs.angular.component";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -36,24 +42,30 @@ import { DeviceApiAddComponent } from './components/device-api-add/device-api-ad
     ClientDetailsComponent,
     DeviceApiComponent,
     DeviceApiDetailsComponent,
-    DeviceApiAddComponent
+    DeviceApiAddComponent,
+    MappingComponent,
+    DeviceComponent,
+    ConsumptionComponent,
+    CanvasJSChart
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FormsModule,  //handling forms in angular
-    ReactiveFormsModule,
-    FlexLayoutModule, //supports flex styling
-    MatButtonModule,  //from angular material
-    MatFormFieldModule,
-    MatCardModule,
-    MatInputModule,
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,  //handling forms in angular
+        ReactiveFormsModule,
+        FlexLayoutModule, //supports flex styling
+        MatButtonModule,  //from angular material
+        MatFormFieldModule,
+        MatCardModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatNativeDateModule
+    ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorIntercept, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorIntercept, multi: true },
   ],
   bootstrap: [AppComponent]
 })

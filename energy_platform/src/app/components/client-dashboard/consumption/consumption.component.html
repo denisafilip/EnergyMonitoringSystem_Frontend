@@ -1,0 +1,82 @@
+<div>
+  <div class="container mx-auto px-2 md:px-12 xl:px-32">
+    <div class="text-center text-gray-800">
+      <div class="block rounded-lg shadow-lg px-6 py-12 md:py-16 md:px-12"
+           style="margin-top: 180px; background-color: hsla(0, 0%, 100%, 0.8);backdrop-filter: saturate(200%) blur(25px);">
+        <h1 class="text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight mb-12">Choose a <br/><span
+          class="text-600" style="color: hsl(318, 44.6%, 48.8%)">device</span></h1>
+
+        <div class="p-4">
+
+          <div class="flex space-x-2 justify-center items-end">
+
+            <div class="flex justify-center">
+              <div class="divider"></div>
+
+              <div class="mb-4 xl:w-96">
+                <p style="font-weight: bold;">Devices</p>
+                <select style="height: 60px" class="form-select form-select-lg mb-3 appearance-none block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label=".form-select-lg example"
+                        [(ngModel)]="currentDevice" (ngModelChange)="setActiveDevice($event)"
+                >
+                  <option selected hidden disabled>Devices</option>
+                  <option
+                    class="list-group-item"
+                    *ngFor="let device of devices"
+                    [ngValue]="device"
+                  >
+                    {{ device.name }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="divider"></div>
+              <div class="mb-4 xl:w-96">
+                <p style="font-weight: bold;">Day</p>
+                <mat-form-field appearance="fill">
+                  <mat-label>Choose a date</mat-label>
+                  <input matInput [matDatepicker]="picker" (dateChange)="getDate($event)">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class="divider"></div>
+
+              <div class="mb-8 xl:w-60">
+                <br/>
+                <br/>
+                <button
+                  class="inline-block px-6 py-2.5 text-white font-medium text-xl-center leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
+                  type="button"
+                  data-mdb-ripple="true"
+                  data-mdb-ripple-color="light"
+                  style="
+                            background: linear-gradient(
+                              to right,
+                              #ee7724,
+                              #d8363a,
+                              #dd3675,
+                              #b44593
+                            );
+                            height: 47px"
+                  (click)="chooseDevice()"
+                >
+                  Choose
+                </button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <br/>
+  <br/>
+
+  <div>
+    <div id="energyConsumptionChart" style="width: 100%; height: 360px"></div>
+    <!--<canvasjs-chart [options]="this.chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>-->
+  </div>
+</div>

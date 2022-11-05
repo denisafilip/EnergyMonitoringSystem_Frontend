@@ -4,11 +4,17 @@ import {Observable, throwError} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {catchError} from "rxjs/operators";
 import {HttpClient} from "@angular/common/http";
+import {User} from "../../models/user/user.model";
 
 export interface UserAuth {
   email: string;
   token: string;
   role: string;
+}
+
+export enum Role {
+  CLIENT = "CLIENT",
+  ADMIN = "ADMIN"
 }
 
 @Injectable({
@@ -56,6 +62,7 @@ export class AuthenticationService {
 
   public logout() {
     sessionStorage.removeItem(this.tokenKey);
+    sessionStorage.removeItem("currentUserEmail");
     this.router.navigate(['/']).then(r => {});
   }
 
@@ -66,5 +73,19 @@ export class AuthenticationService {
 
   public getToken(): string | null {
     return this.isLoggedIn() ? sessionStorage.getItem(this.tokenKey) : null;
+  }
+
+  public getCurrentUser(): User | null {
+    return this.isLoggedIn() ? JSON.parse(sessionStorage.getItem("currentUser") || '{}') : null
+  }
+
+  public redirect(user: User) {
+    if (user.role == 'CLIENT') {
+      this.router.navigate(['/client']).then(() => {});
+    } else if (user.role == 'ADMIN') {
+      this.router.navigate(['/dashboard/admin']).then(() => {});
+    } else {
+      this.router.navigate(['/login']).then(() => {});
+    }
   }
 }

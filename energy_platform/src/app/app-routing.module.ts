@@ -4,12 +4,16 @@ import {LoginComponent} from "./components/login/login.component";
 import {HomeComponent} from "./components/home/home.component";
 import {AuthGuard} from "./helpers/auth.guard";
 import {RegisterComponent} from "./components/register/register.component";
-import {AdminComponent} from "./components/admin/admin.component";
-import {ClientComponent} from "./components/client/client.component";
-import {ClientApiComponent} from "./components/client-api/client-api.component";
-import {ClientDetailsComponent} from "./components/client-api-details/client-details.component";
-import {DeviceApiComponent} from "./components/device-api/device-api.component";
-import {DeviceApiDetailsComponent} from "./components/device-api-details/device-api-details.component";
+import {AdminComponent} from "./components/admin-dashboard/admin/admin.component";
+import {ClientComponent} from "./components/client-dashboard/client/client.component";
+import {ClientApiComponent} from "./components/admin-dashboard/client-api/client-api.component";
+import {ClientDetailsComponent} from "./components/admin-dashboard/client-api-details/client-details.component";
+import {DeviceApiComponent} from "./components/admin-dashboard/device-api/device-api.component";
+import {DeviceApiDetailsComponent} from "./components/admin-dashboard/device-api-details/device-api-details.component";
+import {MappingComponent} from "./components/admin-dashboard/mapping/mapping.component";
+import {DeviceComponent} from "./components/client-dashboard/device/device.component";
+import {Role} from "./services/authentication/authentication.service";
+import {ConsumptionComponent} from "./components/client-dashboard/consumption/consumption.component";
 
 const routes: Routes = [
   {
@@ -28,6 +32,9 @@ const routes: Routes = [
     path: 'dashboard/admin',
     component: AdminComponent,
     canActivate: [AuthGuard],
+    data: {
+      role: [Role.ADMIN],
+    },
     children: [
       {
         path: "clients",
@@ -44,6 +51,10 @@ const routes: Routes = [
       {
         path: "devices/:id",
         component: DeviceApiDetailsComponent
+      },
+      {
+        path: "mappings",
+        component: MappingComponent
       }
     ]
   },
@@ -51,6 +62,19 @@ const routes: Routes = [
     path: 'client',
     component: ClientComponent,
     canActivate: [AuthGuard],
+    data: {
+      role: [Role.CLIENT],
+    },
+    children: [
+      {
+        path: "devices",
+        component: DeviceComponent
+      },
+      {
+        path: "consumption",
+        component: ConsumptionComponent
+      }
+    ]
   },
   {
     path: '**',

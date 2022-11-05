@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from "../../models/user/user.model";
-import {UserService} from "../../services/user/user.service";
+import {User} from "../../../models/user/user.model";
+import {UserService} from "../../../services/user/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Device} from "../../models/device/device.model";
-import {DeviceService} from "../../services/device/device.service";
+import {Device} from "../../../models/device/device.model";
+import {DeviceService} from "../../../services/device/device.service";
 
 @Component({
   selector: 'app-device-api-details',

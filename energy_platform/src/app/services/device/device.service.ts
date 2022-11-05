@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {Device} from "../../models/device/device.model";
@@ -18,7 +18,7 @@ export class DeviceService {
   }
 
   public get(id: any): Observable<Device> {
-    return this.http.get<Device>(`${baseUrl}/${id}`);
+    return this.http.get<Device>(`${baseUrl}${id}/`);
   }
 
   create(data: any): Observable<any> {
@@ -38,6 +38,9 @@ export class DeviceService {
   }
 
   findByName(name: any): Observable<Device[]> {
-    return this.http.get<Device[]>(`${baseUrl}?name=${name}`);
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("name", name);
+
+    return this.http.get<Device[]>(`${baseUrl}`, {params: queryParams});
   }
 }

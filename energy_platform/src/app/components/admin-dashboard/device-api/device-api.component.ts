@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Device} from "../../models/device/device.model";
-import {DeviceService} from "../../services/device/device.service";
+import {Device} from "../../../models/device/device.model";
+import {DeviceService} from "../../../services/device/device.service";
 
 @Component({
   selector: 'app-device-api',

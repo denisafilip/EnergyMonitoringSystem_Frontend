@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../../models/user/user.model";
 import {environment} from "../../../environments/environment";
@@ -18,7 +18,7 @@ export class UserService {
   }
 
   public get(id: any): Observable<User> {
-    return this.http.get<User>(`${baseUrl}/${id}`);
+    return this.http.get<User>(`${baseUrl}${id}/`);
   }
 
   create(data: any): Observable<any> {
@@ -38,6 +38,9 @@ export class UserService {
   }
 
   findByEmail(email: any): Observable<User[]> {
-    return this.http.get<User[]>(`${baseUrl}?email=${email}`);
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("email", email);
+
+    return this.http.get<User[]>(`${baseUrl}`, {params: queryParams});
   }
 }

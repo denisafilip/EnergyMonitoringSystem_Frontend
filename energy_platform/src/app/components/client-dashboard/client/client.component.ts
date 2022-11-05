@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthenticationService} from "../../services/authentication/authentication.service";
+import {AuthenticationService} from "../../../services/authentication/authentication.service";
 
 @Component({
-  selector: 'app-client',
+  selector: 'app-client-dashboard',
   templateUrl: './client.component.html',
   styleUrls: ['./client.component.css']
 })

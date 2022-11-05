@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {AuthenticationService, UserAuth} from '../../services/authentication/authentication.service';
-import {Router} from "@angular/router";
+import {UserService} from "../../services/user/user.service";
+import jwtDecode from "jwt-decode";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private router: Router
+    private userService: UserService,
   ) {}
 
   ngOnInit() {
@@ -25,6 +26,18 @@ export class LoginComponent implements OnInit {
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
     });
+  }
+
+  storeUser(id: any): void {
+    console.log(id)
+    this.userService.get(id)
+      .subscribe({
+        next: (data) => {
+          console.log(data)
+          sessionStorage.setItem("currentUser", JSON.stringify(data));
+        },
+        error: (e) => console.error(e)
+      })
   }
 
   public onSubmit() {
@@ -41,14 +54,15 @@ export class LoginComponent implements OnInit {
         }
         console.log(user);
         sessionStorage.setItem(this.tokenKey, this.user.token);
-        console.log(this.user.role);
-        if (this.user.role == 'CLIENT') {
-          this.router.navigate(['/client']).then(() => {});
-        } else if (this.user.role == 'ADMIN') {
-          this.router.navigate(['/dashboard/admin']).then(() => {});
-        } else {
-          this.router.navigate(['/login']).then(() => {});
-        }
+
+        const token = this.authenticationService.getToken() as string;
+        const payload = jwtDecode(token) as any;
+        const id = payload.id;
+
+        this.storeUser(id);
+        console.log(this.authenticationService.getCurrentUser());
+        this.authenticationService.redirect(this.user);
+
       },
       error: (error) => {
         this.errorMessage = error;
