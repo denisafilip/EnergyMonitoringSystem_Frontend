@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  angular-integration:
+    container_name: angular-integration
+    build:
+      context: ./
+    restart: always
+    ports:
+      - "4200:80"

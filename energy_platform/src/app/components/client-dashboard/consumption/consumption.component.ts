@@ -62,7 +62,7 @@ export class ConsumptionComponent implements OnInit {
         data: [{
           type: "line",
           xValueFormatString: "YYYY",
-          yValueFormatString: "$#,###.##",
+          yValueFormatString: "#,###.##kW",
           dataPoints: this.dataPoints,
         }]
       }
