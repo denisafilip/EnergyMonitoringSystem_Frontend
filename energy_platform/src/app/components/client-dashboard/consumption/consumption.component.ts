@@ -10,6 +10,7 @@ import {Consumption} from "../../../models/consumption/consumption.model";
 import {ConsumptionService} from "../../../services/consumption/consumption.service";
 import {CanvasJS} from "../../../../assets/canvasjs.angular.component";
 import {firstValueFrom} from "rxjs";
+import {webSocket} from "rxjs/webSocket";
 
 @Component({
   selector: 'app-consumption',
@@ -26,6 +27,7 @@ export class ConsumptionComponent implements OnInit {
   consumptions?: Consumption[];
   chartOptions: any;
   dataPoints?: any[];
+  subject?: any;
 
   constructor(private deviceService: DeviceService,
               private mappingService: MappingService,
@@ -40,6 +42,19 @@ export class ConsumptionComponent implements OnInit {
     this.dataPoints = [];
     this.currentUser = this.authenticationService.getCurrentUser();
     this.retrieveDevices();
+
+    this.subject = webSocket(`ws://127.0.0.1:8000/ws/client/${this.authenticationService.getCurrentUserId()}/`);
+    console.log(`ws://127.0.0.1:8000/ws/client/${this.authenticationService.getCurrentUserId()}/`);
+    this.subject.subscribe({
+      next: (notification: any) => {
+        //console.log('message received: ' + notification);
+        console.log('message received: ' + notification.notification);
+        alert(notification.notification);
+        //alert(notification);
+      }, // Called whenever there is a message from the server.
+      error: (err: any) => console.log(err), // Called if at any point WebSocket API signals some kind of error.
+      complete: () => console.log('complete') // Called when connection is closed (for whatever reason).
+    });
   }
 
   async createChart() {

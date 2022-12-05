@@ -9,7 +9,7 @@ import {AuthenticationService} from "../../../services/authentication/authentica
 export class ClientComponent implements OnInit {
 
   constructor(
-    private authenticationService: AuthenticationService,
+    private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit(): void {}
@@ -17,5 +17,4 @@ export class ClientComponent implements OnInit {
   logout(): void {
     this.authenticationService.logout();
   }
-
 }

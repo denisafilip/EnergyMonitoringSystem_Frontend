@@ -75,6 +75,10 @@ export class AuthenticationService {
     return this.isLoggedIn() ? sessionStorage.getItem(this.tokenKey) : null;
   }
 
+  public getCurrentUserId(): any | null {
+    return this.isLoggedIn() ? JSON.parse(sessionStorage.getItem("currentUser") || '{}').id : null
+  }
+
   public getCurrentUser(): User | null {
     return this.isLoggedIn() ? JSON.parse(sessionStorage.getItem("currentUser") || '{}') : null
   }
