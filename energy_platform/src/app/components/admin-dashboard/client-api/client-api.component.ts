@@ -10,7 +10,7 @@ import {UserService} from "../../../services/user/user.service";
 export class ClientApiComponent implements OnInit {
 
   users?: User[];
-  currentUser: User = {};
+  currentUser: User = {email:""};
   currentIndex = -1;
   email = '';
 
@@ -33,7 +33,7 @@ export class ClientApiComponent implements OnInit {
 
   refreshList(): void {
     this.retrieveUsers();
-    this.currentUser = {};
+    this.currentUser = {email:""};
     this.currentIndex = -1;
   }
 
@@ -54,7 +54,7 @@ export class ClientApiComponent implements OnInit {
   }
 
   searchEmail(): void {
-    this.currentUser = {};
+    this.currentUser = {email:""};
     this.currentIndex = -1;
 
     this.userService.findByEmail(this.email)

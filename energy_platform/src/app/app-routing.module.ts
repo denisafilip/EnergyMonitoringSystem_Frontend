@@ -14,6 +14,8 @@ import {MappingComponent} from "./components/admin-dashboard/mapping/mapping.com
 import {DeviceComponent} from "./components/client-dashboard/device/device.component";
 import {Role} from "./services/authentication/authentication.service";
 import {ConsumptionComponent} from "./components/client-dashboard/consumption/consumption.component";
+import {ChatComponent} from "./components/client-dashboard/chat/chat.component";
+import {ChatComponentAdmin} from "./components/admin-dashboard/chat/chat.component";
 
 const routes: Routes = [
   {
@@ -55,6 +57,10 @@ const routes: Routes = [
       {
         path: "mappings",
         component: MappingComponent
+      },
+      {
+        path: "chat",
+        component: ChatComponentAdmin
       }
     ]
   },
@@ -73,6 +79,10 @@ const routes: Routes = [
       {
         path: "consumption",
         component: ConsumptionComponent
+      },
+      {
+        path: "chat",
+        component: ChatComponent
       }
     ]
   },

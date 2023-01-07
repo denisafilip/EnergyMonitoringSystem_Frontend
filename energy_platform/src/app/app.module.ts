@@ -29,6 +29,8 @@ import { ConsumptionComponent } from './components/client-dashboard/consumption/
 import {CanvasJSChart} from "../assets/canvasjs.angular.component";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
+import { ChatComponent } from './components/client-dashboard/chat/chat.component';
+import {ChatComponentAdmin} from "./components/admin-dashboard/chat/chat.component";
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
     MappingComponent,
     DeviceComponent,
     ConsumptionComponent,
-    CanvasJSChart
+    CanvasJSChart,
+    ChatComponent,
+    ChatComponentAdmin
   ],
     imports: [
         BrowserModule,

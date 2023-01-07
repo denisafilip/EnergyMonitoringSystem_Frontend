@@ -79,8 +79,8 @@ export class AuthenticationService {
     return this.isLoggedIn() ? JSON.parse(sessionStorage.getItem("currentUser") || '{}').id : null
   }
 
-  public getCurrentUser(): User | null {
-    return this.isLoggedIn() ? JSON.parse(sessionStorage.getItem("currentUser") || '{}') : null
+  public getCurrentUser(): User {
+    return this.isLoggedIn() ? JSON.parse(sessionStorage.getItem("currentUser") || '{}') : ""
   }
 
   public redirect(user: User) {

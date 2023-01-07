@@ -15,7 +15,7 @@ export class MappingComponent implements OnInit {
   devices?: Device[];
   users?: User[];
   currentDevice: Device = {};
-  currentUser: User = {};
+  currentUser: User = {email:""};
 
   submitted = false;
 
@@ -79,8 +79,8 @@ export class MappingComponent implements OnInit {
 
   newMapping(): void {
     this.submitted = false;
-    this.currentUser = new Device();
-    this.currentDevice = new User();
+    this.currentUser = new User();
+    this.currentDevice = new Device();
   }
 
 }
