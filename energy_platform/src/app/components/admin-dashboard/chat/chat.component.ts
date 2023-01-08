@@ -12,16 +12,16 @@ import {ChatMessage, Empty} from "../../../protoc/generated/chat_pb";
 export class ChatComponentAdmin implements OnInit {
   currentUser: User | null;
 
-  messages: ChatMessage[] = [];
+  msgMap: Map<string, ChatMessage[]>;
   sender: string = "";
   newMessage: string = "";
   client: string = "";
 
   constructor(private authService: AuthenticationService,
               private chatService: ChatService) {
-    this.messages = [];
     this.currentUser = this.authService.getCurrentUser();
     this.sender = this.currentUser.email;
+    this.msgMap = new Map<string, ChatMessage[]>;
   }
 
   sendMessage(): void {
@@ -32,20 +32,31 @@ export class ChatComponentAdmin implements OnInit {
           message.setSender(this.sender);
           message.setReceiver("");
           message.setTimestamp(Date.now());
-          this.messages.push(message);
+
+          if (!this.msgMap.has(this.client)) {
+            this.msgMap.set(this.client, [message]);
+          } else {
+            this.msgMap.get(this.client)?.push(message);
+          }
           this.newMessage = "";
       });
   }
 
   ngOnInit(): void {
     this.newMessage = "";
+
     this.chatService.receiveMessage().subscribe(message => {
-      this.messages.push(message);
+      const receiver = message.getReceiver();
+      if (receiver == "") {
+        this.client = message.getSender();
+      }
+      if (!this.msgMap.has(this.client)) {
+        this.msgMap.set(this.client, [message]);
+      } else {
+        this.msgMap.get(this.client)?.push(message);
+      }
+      console.log(this.msgMap);
     });
-    const receiver = this.messages.at(0)?.getReceiver();
-    if (receiver == "") {
-      this.client ? this.messages.at(0)?.getSender() : "test@gmail.com";
-    }
   }
 
 }
