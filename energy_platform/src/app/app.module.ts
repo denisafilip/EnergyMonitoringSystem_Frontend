@@ -31,6 +31,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MAT_DATE_LOCALE, MatNativeDateModule} from "@angular/material/core";
 import { ChatComponent } from './components/client-dashboard/chat/chat.component';
 import {ChatComponentAdmin} from "./components/admin-dashboard/chat/chat.component";
+import {TypingService} from "./services/typing/typing.service";
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import {ChatComponentAdmin} from "./components/admin-dashboard/chat/chat.compone
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorIntercept, multi: true },
+    TypingService
   ],
   bootstrap: [AppComponent]
 })

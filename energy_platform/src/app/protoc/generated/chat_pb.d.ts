@@ -51,3 +51,27 @@ export namespace Empty {
   }
 }
 
+export class Notification extends jspb.Message {
+  getSender(): string;
+  setSender(value: string): void;
+
+  getReceiver(): string;
+  setReceiver(value: string): void;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): Notification.AsObject;
+  static toObject(includeInstance: boolean, msg: Notification): Notification.AsObject;
+  static extensions: {[key: number]: jspb.ExtensionFieldInfo<jspb.Message>};
+  static extensionsBinary: {[key: number]: jspb.ExtensionFieldBinaryInfo<jspb.Message>};
+  static serializeBinaryToWriter(message: Notification, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Notification;
+  static deserializeBinaryFromReader(message: Notification, reader: jspb.BinaryReader): Notification;
+}
+
+export namespace Notification {
+  export type AsObject = {
+    sender: string,
+    receiver: string,
+  }
+}
+
